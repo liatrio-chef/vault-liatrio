@@ -9,6 +9,8 @@ This file is used to list changes made in each version of the vault-liatrio cook
 - Ticket: CHICO-289 by Justin Bankes
   - Added CHANGELOG
   - Added template to add vault to the path using /etc/environment
+  - Added rubocop
+  - Added Packer.json
 
 
 0.1.0
