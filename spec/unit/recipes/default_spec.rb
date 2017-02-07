@@ -6,15 +6,19 @@
 
 require 'spec_helper'
 
-describe 'liatrio_vault::default' do
-  context 'When all attributes are default, on an unspecified platform' do
-    let(:chef_run) do
-      runner = ChefSpec::ServerRunner.new
-      runner.converge(described_recipe)
-    end
+describe 'vault-liatrio::default' do
+  let(:chef_run) { ChefSpec::SoloRunner.new.converge(described_recipe) }
 
-    it 'converges successfully' do
-      expect { chef_run }.to_not raise_error
-    end
+  it 'includes the hashicorp-vault cookbook' do
+    expect(chef_run).to include_recipe('hashicorp-vault')
+  end
+
+  it 'sets up etc/environment' do
+    expect(chef_run).to create_template('etc/environment').with(
+      source: 'environment.erb',
+      owner: 'root',
+      group: 'root',
+      mode: '0644'
+    )
   end
 end
