@@ -9,6 +9,9 @@ Vagrant.configure(2) do |config|
     chef.add_recipe 'vault-liatrio::default'
   end
 
+  config.vm.network "forwarded_port", guest: 8200, host: 8200
+
+
   config.vm.provider :virtualbox do |v|
     v.customize ['modifyvm', :id, '--natdnshostresolver1', 'on']
     v.customize ['modifyvm', :id, '--cableconnected1', 'on']
